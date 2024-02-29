@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="item-details-page">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-heading">
+                        <div class="line-dec"></div>
+                        <h2>Sign In</h2>
+                        <div class="col-lg-12">
+                            <fieldset>
+                                <h1><p>Do you have not accout? <a href="{% url 'market:register' %}">Sign Up</a></p>
+                                </h1>
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <form id="contact" action="" method="post">
+                        {% csrf_token %}
+                        {% for field in form %}
+                            <div class="form-group">
+                                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                                {{ field }}
+                                {% if field.help_text %}
+                                    <small class="form-text text-muted">{{ field.help_text }}</small>
+                                {% endif %}
+                                {% for error in field.errors %}
+                                    <div class="alert alert-danger">{{ error }}</div>
+                                {% endfor %}
+                            </div>
+                        {% endfor %}
+                        <div class="col-lg-6">
+                            <fieldset>
+                                <button type="submit" id="form-submit" class="orange-button">Sign In</button>
+                            </fieldset>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

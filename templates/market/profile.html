@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% block title %}Author Details{% endblock %}
+{% block content %}
+    {% load static %}
+
+    <div class="author-page">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="author">
+                        <img src="{{ author.avatar.url }}" alt="" style="border-radius: 50%; max-width: 170px;">
+                        <h4>{{ author.first_name }} {{ author.last_name }} <br> <a href="#">@{{ author.username }}</a>
+                        </h4>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="right-info">
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="info-item">
+                                    <i class="fa fa-heart"></i>
+{#                                    <h6>{{ author.likes }} <em>Likes</em></h6>#}
+                                    {# Assuming the Author model has a 'likes' field #}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {# My Items #}
+                <div class="col-lg-12">
+                    <div class="section-heading">
+                        <div class="line-dec"></div>
+                        <h2>My <em>Items</em>.</h2>
+                    </div>
+                </div>
+                {% for product in products %}
+                    <div class="col-lg-3 col-md-6">
+                        <div class="item">
+                            <div class="row">
+                                <div class="col-lg-12">
+        <span class="author">
+          <img src="{{ author.avatar.url }}" alt="" style="max-width: 50px; border-radius: 50%;">
+        </span>
+                                    <img src="{{ product.image.url }}" alt="" style="border-radius: 20px;">
+                                    {# Assuming the Product model has an 'image' field #}
+                                    <h4>{{ product.title }}</h4>
+                                    <a href="{% url 'market:product_detail' product.id %}" class="btn btn-primary">View
+                                        detail</a> {# Ensure you're passing the product's id #}
+                                    <a href="{% url 'market:product_update' product.id %}" class="btn btn-secondary">Update</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

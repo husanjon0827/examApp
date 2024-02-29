@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% block title %}Details{% endblock %}
+{% load static %}
+{% block content %}
+
+    <div class="page-heading normal-space">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h6>Liberty NFT Market</h6>
+                    <h2>View Item Details</h2>
+                    <span>Home > <a href="#">Item Details</a></span>
+                    <div class="buttons">
+                        <div class="main-button">
+                            <a href="{% url 'market:product_list' %}">Explore Our Items</a>
+                        </div>
+                        <div class="border-button">
+                            <a href="{% url 'market:create_product' %}">Create Your NFT</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="item-details-page">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-heading">
+                        <div class="line-dec"></div>
+                        <h2>View Details <em>For Item</em> Here.</h2>
+                    </div>
+                </div>
+                <div class="col-lg-7">
+                    <div class="left-image">
+                        <img src="{{ product.image.url }}" alt="{{ product.title }}" style="max-width: 400px; border-radius: 10%;">
+                    </div>
+                </div>
+                <div class="col-lg-5 align-self-center">
+                    <h4>{{ product.title }}</h4>
+                    <span class="author">
+                        <img src="{{ product.name.avatar.url }}" alt="{{ product.name.first_name }}" style="max-width: 50px; border-radius: 50%;">
+                        <h6>{{ product.name.last_name }}<br><a href="#">@{{ product.name.username }}</a></h6>
+                    </span>
+                    <p>{{ product.description }}</p>
+                    <div class="row">
+                        <div class="col-3">
+                            <span class="bid">
+                                Current Bid<br><strong>{{ product.price }} $</strong><br><em></em>
+                            </span>
+                        </div>
+                        <div class="col-5">
+                            <span class="ends">
+                                Ends In<br><strong>{{ product.ends_in }}</strong><br><em>{{ product.end_date }}</em>
+                            </span>
+                        </div>
+                    </div>
+                    <form method="post" action="{% url 'market:product_detail' product.id %}">
+                        {% csrf_token %}
+                        <label for="quantity-text">Place Bid:</label>
+                        <input placeholder="{{ product.price }} $" class="quantity-text" name="bid">
+                        <button type="submit" id="form-submit" class="main-button">Submit Now</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="create-nft">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="section-heading">
+                        <div class="line-dec"></div>
+                        <h2>Create Your NFT & Put It On The Market.</h2>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="main-button">
+                        <a href="{% url 'market:create_product' %}">Create Your NFT Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

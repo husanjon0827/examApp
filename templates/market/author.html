@@ -1,0 +1,133 @@
+{% extends 'base.html' %}
+{% block title %}Author Details{% endblock %}
+{% block content %}
+    {% load static %}
+    <div class="page-heading normal-space">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h6>Author Details</h6>
+                    <h2>View Details For Author</h2>
+                    <span>Home > <a href="#">Author</a></span>
+                    <div class="buttons">
+                        <div class="main-button">
+                            <a href="explore.html">Explore Our Items</a>
+                        </div>
+                        <div class="border-button">
+                            <a href="{% url 'market:create_product' %}">Create Your NFT</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+ <div class="author-page">
+<div class="container">
+  <div class="row">
+      {% for author in authors %}
+    <div class="col-lg-6">
+      <div class="author">
+        {% if author.avatar %}
+          <img src="{{ author.avatar.url }}" alt="" style="border-radius: 50%; max-width: 170px;">
+        {% else %}
+          <img src="{% static 'default-avatar.png' %}" alt="" style="border-radius: 50%; max-width: 170px;">
+        {% endif %}
+        <h4>{{ author.first_name }} {{ author.last_name }}<br> <a href="#">@{{ author.username }}</a></h4>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="right-info">
+        <div class="row">
+          <div class="col-4">
+            <div class="info-item">
+              <i class="fa fa-heart"></i>
+              <h6>{{ author.like_count }}<em>Likes</em></h6>
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="info-item">
+              <i class="fa fa-hand"></i>
+              <h6>{{ author.like_count }} <em>Likes</em></h6>
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="info-item">
+              <i class="fa fa-dollar"></i>
+              <h6>{{ author.like_count }} <em>Likes</em></h6>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-5">
+            <h5>559 Followers</h5>
+          </div>
+          <div class="col-7">
+            <div class="main-button">
+              <a href="#">Like Button @{{ author.username }}</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  {% include 'market/author_pagination.html' %}
+  </div>
+</div>
+</div>
+
+    {#    FOOOOTEEEER#}
+    <div class="create-nft">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="section-heading">
+                        <div class="line-dec"></div>
+                        <h2>Create Your NFT & Put It On The Market.</h2>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="main-button">
+                        <a href="{% url 'market:create_product' %}">Create Your NFT Now</a>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="item first-item">
+                        <div class="number">
+                            <h6>1</h6>
+                        </div>
+                        <div class="icon">
+                            <img src="{% static 'assets/images/icon-02.png' %}" alt="">
+                        </div>
+                        <h4>Set Up Your Wallet</h4>
+                        <p>Lorem ipsum dolor sit amet, consectetu dipiscingei elit, sed do eiusmod tempor incididunt ut
+                            labore et dolore magna aliqua.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="item second-item">
+                        <div class="number">
+                            <h6>2</h6>
+                        </div>
+                        <div class="icon">
+                            <img src="{% static 'assets/images/icon-04.png' %}" alt="">
+                        </div>
+                        <h4>Add Your Digital NFT</h4>
+                        <p>Lorem ipsum dolor sit amet, consectetu dipiscingei elit, sed do eiusmod tempor incididunt ut
+                            labore et dolore magna aliqua.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="item">
+                        <div class="icon">
+                            <img src="{% static 'assets/images/icon-06.png' %}" alt="">
+                        </div>
+                        <h4>Sell Your NFT &amp; Make Profit</h4>
+                        <p>Lorem ipsum dolor sit amet, consectetu dipiscingei elit, sed do eiusmod tempor incididunt ut
+                            labore et dolore magna aliqua.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
